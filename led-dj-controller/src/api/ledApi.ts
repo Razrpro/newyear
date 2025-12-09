@@ -5,7 +5,8 @@ export interface LED {
   состояние: string;
 }
 
-const API_BASE_URL = 'http://localhost:5001';
+// Используем относительный путь - Vite проксирует /api на http://localhost:5001
+const API_BASE_URL = '/api';
 
 export const ledApi = {
   // Получить все светодиоды
