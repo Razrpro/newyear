@@ -1,0 +1,163 @@
+.led-button {
+  position: relative;
+  aspect-ratio: 1;
+  min-height: 180px;
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border: 2px solid #2a2a3e;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  padding: 0;
+}
+
+.led-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(145deg, transparent, rgba(255, 255, 255, 0.05));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.led-button:hover::before {
+  opacity: 1;
+}
+
+.led-button:hover {
+  transform: translateY(-4px);
+  border-color: #3a3a4e;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.led-button.active {
+  background: linear-gradient(145deg, #1a3a2e, #16523e);
+  border-color: #00ff88;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 136, 0.3),
+    0 0 40px rgba(0, 255, 136, 0.1),
+    inset 0 0 30px rgba(0, 255, 136, 0.1);
+}
+
+.led-button.active:hover {
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(0, 255, 136, 0.5),
+    0 0 60px rgba(0, 255, 136, 0.2),
+    inset 0 0 40px rgba(0, 255, 136, 0.15);
+}
+
+.led-button:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.led-button-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 1rem;
+}
+
+.led-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #666;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.led-button.active .led-number {
+  color: #00ff88;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.led-indicator {
+  margin: 1rem 0;
+}
+
+.led-light {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.led-light.off {
+  background: radial-gradient(circle, #2a2a3e, #1a1a2e);
+  border: 2px solid #3a3a4e;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.led-light.on {
+  background: radial-gradient(circle, #00ff88, #00dd77);
+  border: 2px solid #00ff88;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 136, 0.8),
+    0 0 40px rgba(0, 255, 136, 0.4),
+    inset 0 0 15px rgba(255, 255, 255, 0.3);
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(0, 255, 136, 0.8),
+      0 0 40px rgba(0, 255, 136, 0.4),
+      inset 0 0 15px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(0, 255, 136, 1),
+      0 0 60px rgba(0, 255, 136, 0.6),
+      inset 0 0 20px rgba(255, 255, 255, 0.4);
+  }
+}
+
+.led-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #999;
+  margin-top: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.led-button.active .led-label {
+  color: #00ff88;
+}
+
+.led-pin {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 0.25rem;
+  font-family: 'Courier New', monospace;
+}
+
+.led-button.active .led-pin {
+  color: #00dd77;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .led-button {
+    min-height: 150px;
+  }
+
+  .led-number {
+    font-size: 2rem;
+  }
+
+  .led-light {
+    width: 30px;
+    height: 30px;
+  }
+
+  .led-label {
+    font-size: 0.8rem;
+  }
+}
