@@ -14,6 +14,18 @@ const DJController = () => {
     loadLeds();
   }, []);
 
+  // Периодический опрос состояния каждые 2 секунды
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Только если не в состоянии загрузки и нет ошибки
+      if (!loading && !error) {
+        refreshLeds();
+      }
+    }, 2000); // 2 секунды
+
+    return () => clearInterval(interval);
+  }, [loading, error]);
+
   const loadLeds = async () => {
     try {
       setLoading(true);
@@ -25,6 +37,18 @@ const DJController = () => {
       console.error('Error loading LEDs:', err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Обновление без установки loading state
+  const refreshLeds = async () => {
+    try {
+      const data = await ledApi.getAllLeds();
+      setLeds(data);
+      setError(null);
+    } catch (err) {
+      console.error('Error refreshing LEDs:', err);
+      // Не устанавливаем ошибку при фоновом обновлении
     }
   };
 
@@ -79,6 +103,7 @@ const DJController = () => {
             key={led.id}
             led={led}
             onToggle={() => handleToggle(led)}
+            disabled={led.id >= 4 && led.id <= 12}
           />
         ))}
       </div>

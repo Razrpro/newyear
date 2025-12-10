@@ -4,15 +4,17 @@ import './LEDButton.css';
 interface LEDButtonProps {
   led: LED;
   onToggle: () => void;
+  disabled?: boolean;
 }
 
-const LEDButton = ({ led, onToggle }: LEDButtonProps) => {
+const LEDButton = ({ led, onToggle, disabled = false }: LEDButtonProps) => {
   const isOn = led.состояние === 'вкл';
 
   return (
     <button
-      className={`led-button ${isOn ? 'active' : ''}`}
+      className={`led-button ${isOn ? 'active' : ''} ${disabled ? 'disabled' : ''}`}
       onClick={onToggle}
+      disabled={disabled}
       aria-label={`${led.название} - ${isOn ? 'включен' : 'выключен'}`}
     >
       <div className="led-button-inner">
