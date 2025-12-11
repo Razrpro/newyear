@@ -103,7 +103,7 @@ const DJController = () => {
             key={led.id}
             led={led}
             onToggle={() => handleToggle(led)}
-            disabled={led.id >= 4 && led.id <= 12}
+            disabled={led.id >= 5 && led.id <= 12}
           />
         ))}
       </div>
