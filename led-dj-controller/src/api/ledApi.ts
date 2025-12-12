@@ -6,12 +6,12 @@ export interface LED {
 }
 
 // Используем относительный путь - Vite проксирует /api на http://localhost:5001
-const API_BASE_URL = '/api';
+const API_BASE_URL = '/newapi';
 
 export const ledApi = {
     // Получить все светодиоды
     getAllLeds: async (): Promise<LED[]> => {
-        const response = await fetch(`${API_BASE_URL}/leds/`);
+        const response = await fetch(`${API_BASE_URL}/leds`);
         if (!response.ok) {
             throw new Error('Failed to fetch LEDs');
         }

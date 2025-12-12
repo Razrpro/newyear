@@ -14,7 +14,7 @@ export default defineConfig({
     allowedHosts: ['.zrok.io'],
     proxy: {
       '/api': {
-        target: 'http://localhost:5001',
+        target: 'https://razr.freedynamicdns.org:5001',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }
